@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="PlaywrightCrossBrowserSuite"  thread-count="6">
+
+    <test name="Booking Chrome">
+        <parameter name="browserType" value="chromium"/>
+        <classes>
+            <class name="ge.tbc.testautomation.tests.CoreFunctionalityTests"/>
+            <class name="ge.tbc.testautomation.tests.UIResponsivenessTests"/>
+        </classes>
+    </test>
+
+    <test name="Booking Safari">
+        <parameter name="browserType" value="safari"/>
+        <classes>
+            <class name="ge.tbc.testautomation.tests.CoreFunctionalityTests"/>
+            <class name="ge.tbc.testautomation.tests.UIResponsivenessTests"/>
+        </classes>
+    </test>
+</suite>
