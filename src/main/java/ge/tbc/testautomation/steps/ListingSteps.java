@@ -21,19 +21,19 @@ import java.util.stream.IntStream;
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 
 public class ListingSteps {
-    Page page;
-    HomePage homePage;
-    ListingPage listingPage;
+    public Page page;
+   public HomePage homePage;
+    public ListingPage listingPage;
     private OfferModel currentOfferDetails;
     private TestContext testContext;
     public SoftAssert softAssert;
     private Map<Integer, List<Integer>> cardRowGroups = new TreeMap<>();
-    Calendar cal = Calendar.getInstance();
+   public Calendar cal = Calendar.getInstance();
 
     public ListingSteps(Page page, TestContext testContext) {
         this.page = page;
-        listingPage = new ListingPage(page);
-        homePage = new HomePage(page);
+        this.listingPage = new ListingPage(page);
+        this.homePage = new HomePage(page);
         this.testContext = testContext;
         this.softAssert = new SoftAssert();
     }
@@ -269,4 +269,54 @@ public class ListingSteps {
         assertThat(homePage.calendar).containsText(checkOutDay);
         return this;
     }
+
+    public ListingSteps changeToGrid()
+    {
+        listingPage.grid.click();
+        listingPage.grid.click();
+        return this;
+    }
+
+   public ListingSteps validateErrorMessage()
+   {
+       listingPage.errorMessage.waitFor();
+       assertThat(listingPage.errorMessage).isVisible();
+       return this;
+   }
+
+  public ListingSteps validateFiltersAreVisible()
+  {
+      assertThat(listingPage.filters).isVisible();
+      return this;
+  }
+
+  public ListingSteps validatePageDoesNotCrashed()
+  {
+      assertThat(page.locator("body")).isVisible();
+      return this;
+  }
+
+  public ListingSteps validateLoaderDisappear()
+  {
+      assertThat(homePage.loader).not().isVisible();
+      return this;
+  }
+
+  public ListingSteps validateToastAlert()
+  {
+      assertThat(listingPage.toastAlert).isVisible();
+      return this;
+  }
+
+  public ListingSteps validateRetryButton()
+  {
+      assertThat(listingPage.retryButton).isVisible();
+      return this;
+  }
+
+  public ListingSteps validateProperLogging()
+  {
+      assertThat(listingPage.logging).isVisible();
+      return this;
+  }
 }

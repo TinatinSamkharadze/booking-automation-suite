@@ -24,7 +24,9 @@ public class HomePage {
             occupancy,
             guests,
             minus,
-            plus;
+            plus,
+            firstOption,
+            loader;
 
     public HomePage(Page page) {
         this.page = page;
@@ -36,7 +38,7 @@ public class HomePage {
         this.hamburgerMenu = page.getByTestId("header-mobile-menu-button").first();
         this.footerLinks = page.locator(".e9f7361569.b049f18dec");
         this.header = page.getByTestId("web-shell-header-mfe");
-        this.calendarContainer = page.getByTestId("searchbox-datepicker");
+        this.calendarContainer = page.getByTestId("searchbox-datepicker-calendar");
         this.nextMonthButton = page.locator("[aria-label='Next month']");
         this.locationOptions = page.locator("#autocomplete-results");
         this.footers = page.locator(".cec0620c60");
@@ -44,6 +46,9 @@ public class HomePage {
         this.guests = page.locator(".e301a14002");
         this.minus = page.locator(".de576f5064.b46cd7aad7.e26a59bb37.c295306d66.c7a901b0e7.aaf9b6e287.c857f39cb2");
         this.plus = page.locator(".de576f5064.b46cd7aad7.e26a59bb37.c295306d66.c7a901b0e7.aaf9b6e287.dc8366caa6");
+        this.firstOption = page.locator("#autocomplete-result-0");
+        this.loader = page.locator("[data-testid='loader-container']");
+
     }
 
     public Locator checkInDay(String day)

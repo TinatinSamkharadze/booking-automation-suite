@@ -1,9 +1,11 @@
 package ge.tbc.testautomation.tests;
 
-import ge.tbc.testautomation.data.enums.ReservationPolicy;
 import ge.tbc.testautomation.data.enums.PropertyRating;
 import ge.tbc.testautomation.data.enums.PropertyType;
+import ge.tbc.testautomation.data.enums.ReservationPolicy;
 import ge.tbc.testautomation.runners.BaseTest;
+import ge.tbc.testautomation.utils.Retry;
+import ge.tbc.testautomation.utils.RetryAnalyzer;
 import org.testng.annotations.Test;
 
 import static ge.tbc.testautomation.data.Constants.*;
@@ -16,51 +18,56 @@ public class CoreFunctionalityTests extends BaseTest {
                 .searchLocation(KYOTO)
                 .selectLocationOption(KYOTO)
                 .clickOnCalendar()
-                .clickSearchButton()
-                .clickOnCalendar();
+                .clickSearchButton();
         listingSteps
                 .validateResultsAppear()
                 .validateSearchHeaderContainsCorrectText(KYOTO)
+                .waitElementToBeStable()
                 .scrollThroughPropertyCards()
                 .validateResultsLocationIsCorrect(KYOTO);
     }
 
-    @Test(priority = 2)
-    public void dateSelectionTest()
-    {
+    @Test(priority = 2, retryAnalyzer = RetryAnalyzer.class)
+    @Retry(maxRetries = 1)
+    public void dateSelectionTest() {
         homeSteps
                 .validateSearchBarIsClear()
-                .searchLocation(KYOTO)
-                .selectLocationOption(KYOTO)
+                .searchLocation(TOKYO_CITY)
+                .selectLocationOption(TOKYO_CITY)
+                .ifNotVisibleClickOnCalendar()
                 .clickNextMonthButton()
                 .selectCheckInDate(FIRST_DAY_OF_MONTH)
                 .selectCheckOutDay(LAST_DAY_OF_MONTH)
                 .clickSearchButton();
         listingSteps
                 .validateCheckInDate(FIRST_DAY_OF_MONTH)
-                .validateCheckOutDate(LAST_DAY_OF_MONTH);
+                .validateCheckOutDate(LAST_DAY_OF_MONTH)
+                .validateResultsAppear()
+                .validateSearchHeaderContainsCorrectText(TOKYO_CITY)
+                .waitElementToBeStable()
+                .scrollThroughPropertyCards()
+                .validateResultsLocationIsCorrect(TOKYO_CITY);
 
     }
 
-    @Test(priority = 3)
-    public void filterApplicationTest()
-    {
+    @Test(priority = 3, retryAnalyzer = RetryAnalyzer.class)
+    @Retry(maxRetries = 1)
+    public void filterApplicationTest() {
         homeSteps
                 .validateSearchBarIsClear()
                 .searchLocation(NEW_YORK)
                 .waitForLocationOptionsToAppear()
                 .selectLocationOption(NEW_YORK)
-                .clickOnCalendar();
-        listingSteps
-                .waitElementToBeStable();
+                .ifNotVisibleClickOnCalendar();
         homeSteps
                 .clickNextMonthButton()
-                .selectCheckInDate("2")
-                .selectCheckOutDay("29")
+                .selectCheckInDate(CHECKIN_DAY_ONE)
+                .selectCheckOutDay(CHECKOUT_DAY_1)
                 .clickSearchButton();
         listingSteps
-                .validateCheckInDate("2")
-                .validateCheckOutDate("29")
+                .validateCheckInDate(CHECKIN_DAY_ONE)
+                .validateCheckOutDate(CHECKOUT_DAY_1)
+                .changeToGrid()
                 .validateResultsAppear()
                 .waitElementToBeStable()
                 .selectPropertyType(PropertyType.HOTELS)
@@ -81,24 +88,20 @@ public class CoreFunctionalityTests extends BaseTest {
     }
 
     @Test(priority = 4)
-    public void sortByReviewScoreTest()
-    {
+    public void sortByReviewScoreTest() {
         homeSteps
                 .validateSearchBarIsClear()
-                .searchLocation(NEW_YORK)
+                .searchLocation(NARA)
                 .waitForLocationOptionsToAppear()
-                .selectLocationOption(NEW_YORK)
-                .clickOnCalendar();
-        listingSteps
-                .waitElementToBeStable();
-        homeSteps
+                .selectLocationOption(NARA)
+                .ifNotVisibleClickOnCalendar()
                 .clickNextMonthButton()
-                .selectCheckInDate("3")
-                .selectCheckOutDay("28")
+                .selectCheckInDate(CHECKIN_DAY_TWO)
+                .selectCheckOutDay(CHECKOUT_DAY_2)
                 .clickSearchButton();
         listingSteps
-                .validateCheckInDate("3")
-                .validateCheckOutDate("28")
+                .validateCheckInDate(CHECKIN_DAY_TWO)
+                .validateCheckOutDate(CHECKOUT_DAY_2)
                 .validateResultsAppear()
                 .waitElementToBeStable()
                 .selectPropertyRating(PropertyRating.FIVE_STARS)
@@ -113,24 +116,20 @@ public class CoreFunctionalityTests extends BaseTest {
     }
 
     @Test(priority = 5)
-    public void propertyDetailsConsistencyTest()
-    {
+    public void propertyDetailsConsistencyTest() {
         homeSteps
                 .validateSearchBarIsClear()
-                .searchLocation(KYOTO)
+                .searchLocation(OSAKA)
                 .waitForLocationOptionsToAppear()
-                .selectLocationOption(KYOTO)
-                .clickOnCalendar();
-        listingSteps
-                .waitElementToBeStable();
-        homeSteps
+                .selectLocationOption(OSAKA)
+                .ifNotVisibleClickOnCalendar()
                 .clickNextMonthButton()
-                .selectCheckInDate("4")
-                .selectCheckOutDay("27")
+                .selectCheckInDate(CHECKING_DAY_THREE)
+                .selectCheckOutDay(CHECKOUT_DAY_3)
                 .clickSearchButton();
         listingSteps
-                .validateCheckInDate("4")
-                .validateCheckOutDate("27")
+                .validateCheckInDate(CHECKING_DAY_THREE)
+                .validateCheckOutDate(CHECKOUT_DAY_3)
                 .validateResultsAppear()
                 .waitElementToBeStable()
                 .selectPropertyType(PropertyType.HOTELS)

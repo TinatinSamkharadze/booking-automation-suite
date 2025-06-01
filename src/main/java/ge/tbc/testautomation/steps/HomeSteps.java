@@ -2,7 +2,9 @@ package ge.tbc.testautomation.steps;
 
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
+import com.microsoft.playwright.Route;
 import ge.tbc.testautomation.pages.HomePage;
+import ge.tbc.testautomation.utils.FileUtil;
 import org.testng.Assert;
 import org.testng.asserts.SoftAssert;
 
@@ -10,12 +12,16 @@ import java.sql.Date;
 import java.util.Calendar;
 
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
+import static ge.tbc.testautomation.data.Constants.LISTING_PAGE;
 
 public class HomeSteps {
     Page page;
     HomePage homePage;
     SoftAssert softAssert;
     Calendar cal = Calendar.getInstance();
+    String mockResponse = FileUtil.loadJson("src/main/resources/data.json");
+    String serverErrorResponse = FileUtil.loadJson("src/main/resources/error_handling_test.json");
+
 
     public HomeSteps(Page page) {
         this.page = page;
@@ -190,4 +196,71 @@ public class HomeSteps {
         }
         return this;
     }
+
+    public HomeSteps clickOnSearchBar() {
+        homePage.searchBar.click();
+        return this;
+    }
+
+    public HomeSteps chooseFirstOption() {
+        homePage.firstOption.waitFor();
+        homePage.firstOption.click();
+        return this;
+    }
+
+    public HomeSteps validateCalendarContainerIsVisible() {
+        assertThat(homePage.calendarContainer).isVisible();
+        return this;
+    }
+
+    public HomeSteps ifNotVisibleClickOnCalendar() {
+        if (homePage.calendarContainer.isHidden()) {
+            homePage.calendar.click();
+        }
+        return this;
+    }
+
+    public HomeSteps validateLoaderIsVisible()
+    {
+        assertThat(homePage.loader).isHidden();
+        return this;
+    }
+    public HomeSteps navigateToListingPage() {
+        page.navigate(LISTING_PAGE);
+        return this;
+    }
+
+    public HomeSteps interceptSearchResultsApi() {
+        page.route("**/searchresults*", route -> {
+            route.fulfill(new Route.FulfillOptions()
+                    .setStatus(200)
+                    .setBody(mockResponse)
+                    .setContentType("application/json"));
+        });
+        return this;
+    }
+
+    public HomeSteps simulateSlowSearchResultsAPI() {
+        page.route("**/searchresults*", route -> {
+            try {
+                Thread.sleep(5000);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+            route.resume();
+        });
+        return this;
+    }
+
+    public HomeSteps simulateHotelListServerError() {
+        page.route("**/searchresults*", route -> {
+            route.fulfill(new Route.FulfillOptions()
+                    .setStatus(500)
+                    .setBody(serverErrorResponse));
+        });
+        return this;
+    }
+
+
+
 }

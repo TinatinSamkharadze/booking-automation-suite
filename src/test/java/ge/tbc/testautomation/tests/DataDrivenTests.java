@@ -12,10 +12,11 @@ public class DataDrivenTests extends BaseTest {
     {
         homeSteps
                 .validateSearchBarIsClear()
-                .validateSearchBarIsClear()
                 .searchLocation(bookingCase.getDestination())
                 .selectLocationOption(bookingCase.getDestination())
+                .ifNotVisibleClickOnCalendar()
                 .clickNextMonthButton()
+                .validateCalendarContainerIsVisible()
                 .selectCheckIn(bookingCase.getCheckIn())
                 .selectCheckOut(bookingCase.getCheckOut())
                 .clickOccupancy()

@@ -1,0 +1,43 @@
+{
+  "scenario": "Results List API - Server Error Handling",
+  "api": {
+    "endpoint": "**/searchresults*",
+    "method": "GET",
+    "simulateError": {
+      "statusCode": 500,
+      "body": "Internal Server Error"
+    }
+  },
+  "expectedUI": {
+    "toast": {
+      "visible": true,
+      "type": "error",
+      "text": "Something went wrong while loading results. Please try again."
+    },
+    "banner": {
+      "visible": false
+    },
+    "retryButton": {
+      "visible": true,
+      "text": "Retry"
+    },
+    "fallbackUI": {
+      "visible": true,
+      "component": "ErrorCard",
+      "text": "Unable to load hotel list"
+    }
+  },
+  "logging": {
+    "level": "error",
+    "expectedMessage": "GET /hotelList failed with status 500",
+    "logTo": ["console", "file"]
+  },
+  "recovery": {
+    "retryButtonAction": "refetch hotelList",
+    "expectedOnRetry": {
+      "apiCallTriggered": true,
+      "loaderVisible": true,
+      "errorCleared": true
+    }
+  }
+}

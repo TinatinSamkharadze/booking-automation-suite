@@ -10,7 +10,7 @@ import org.testng.asserts.SoftAssert;
 
 import java.util.Arrays;
 
-import static ge.tbc.testautomation.data.Constants.*;
+import static ge.tbc.testautomation.data.Constants.BOOKING_BASE_URL;
 
 public class BaseTest {
     public SoftAssert softAssert;
@@ -38,6 +38,9 @@ public class BaseTest {
             browser = playwright.webkit().launch(launchOptions);
         }
         browserContext = browser.newContext();
+        browserContext.onDialog(dialog -> {
+            dialog.dismiss();
+        });
         browserContext.route("**/signin**", route -> route.abort());
         browserContext.route("**/login-popup**", route -> route.abort());
         page = browserContext.newPage();
@@ -47,13 +50,13 @@ public class BaseTest {
     @BeforeMethod
     public void resetContext() {
         page.navigate(BOOKING_BASE_URL);
+        this.homeSteps = new HomeSteps(page);
         browserContext.onDialog(dialog -> {
             dialog.dismiss();
         });
         browserContext.route("**/signin**", route -> route.abort());
         browserContext.route("**/login-popup**", route -> route.abort());
         this.sharedContext = new TestContext();
-        this.homeSteps = new HomeSteps(page);
         this.listingSteps = new ListingSteps(page, sharedContext);
         this.detailsSteps = new DetailsSteps(page, sharedContext);
        this.softAssert = new SoftAssert();
