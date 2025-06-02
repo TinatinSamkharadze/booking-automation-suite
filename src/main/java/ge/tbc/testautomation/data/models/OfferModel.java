@@ -9,7 +9,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class OfferModel {
-    public OfferElement title;
-    public OfferElement reviewScore;
-    public OfferElement location;
+    public OfferElement title,
+    reviewScore,
+    location,
+    roomType;
 }

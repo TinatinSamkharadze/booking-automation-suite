@@ -21,13 +21,17 @@ public class ListingPage {
             calendarContainer,
             errorMessage,
             filters,
-    toastAlert,
-    retryButton,
-    logging;
+            toastAlert,
+            retryButton,
+            logging,
+            occupancy,
+            desktopGrid,
+            cardContainer,
+            bookingLogo;
 
     public ListingPage(Page page) {
         this.page = page;
-        this.propertyCards = page.locator("div[data-testid='property-card'] ");
+        this.propertyCards = page.getByTestId("property-card");
         this.searchHeader = page.locator(".b87c397a13.cacb5ff522");
         this.dismissButton = page.locator("#b2searchresultsPage");
         this.sortButton = page.locator(".cd46a6a263");
@@ -35,19 +39,22 @@ public class ListingPage {
         this.propertyCardTitle = page.locator(".b87c397a13.a3e0b4ffd1").first();
         this.reviewScore = page.locator("[data-testid='review-score']");
         this.searchBoxForCalendar = page.getByTestId("searchbox-dates-container");
-        this.grid = page.locator(".b99b6ef58f.e8e3ebaab8").first();
+        this.grid = page.locator(".b99b6ef58f.e8e3ebaab8").last();
         this.calendarContainer = page.getByTestId("searchbox-datepicker");
         this.errorMessage = page.locator("text=No Results Found");
         this.filters = page.getByText("5 stars").first();
         this.toastAlert = page.getByText("Something went wrong while loading results. Please try again.");
         this.retryButton = page.getByText("Retry");
         this.logging = page.getByText("hotelList failed with status 500");
-
+        this.occupancy = page.getByTestId("occupancy-config").first();
+        this.cardContainer = page.getByRole(AriaRole.LIST).first();
+        this.bookingLogo = page.getByTestId("header-booking-logo");
     }
 
     public String locationSelector = "[data-testid='address']";
     public String titleSelector = "[data-testid='title']";
     public String reviewScoreSelector = "[data-testid='review-score']";
+    public String roomType = ".fff1944c52.f254df5361";
 
 
     public Locator getPropertyTypeCheckbox(PropertyType propertyType) {

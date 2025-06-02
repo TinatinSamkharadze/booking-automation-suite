@@ -22,7 +22,8 @@ public class Constants {
             HEIGHT_FOR_TABLET = 1024,
             WIDTH_FOR_MOBILE = 375,
             HEIGHT_FOR_MOBILE = 667,
-            DESKTOP_GRID_LAYOUT = 1,
-            TABLET_GRID_LAYOUT = 1,
-            MOBILE_GRID_LAYOUT = 1;
+            DESKTOP_GRID_LAYOUT = 3,
+            TABLET_GRID_LAYOUT = 2,
+            MOBILE_GRID_LAYOUT = 1,
+    GUESTS = 2;
 }
