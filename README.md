@@ -1,1 +1,1 @@
-# booking-automation-suite
+Booking Automation Suite
