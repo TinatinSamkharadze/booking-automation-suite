@@ -1,4 +1,4 @@
-Booking Automation Suite
+
 # 🧪 Project N2: End-to-End UI Test Automation for Booking.com
 
 ## 🎯 Objective
