@@ -20,8 +20,9 @@ public class DataDrivenTests extends BaseTest {
     @Story("User Search Form Validation")
     @Feature("Search and Booking Flow")
     @Severity(SeverityLevel.CRITICAL)
-    @Description("Validates that users can successfully search for accommodations using various search criteria " +
-            "including destination, check-in/out dates, and guest count. Verifies that search results " +
+    @Description("Validates that users can successfully search for accommodations" +
+            " using various search criteria including destination, check-in/out dates," +
+            " and guest count. Verifies that search results " +
             "correctly reflect the input parameters.")
     public void searchFormTest(BookingCase bookingCase) {
         homeSteps

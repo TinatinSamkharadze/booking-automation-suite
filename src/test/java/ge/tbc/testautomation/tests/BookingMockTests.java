@@ -13,7 +13,9 @@ public class BookingMockTests extends BrowserInjection {
     @Feature("Empty Search Results")
     @Story("Validate system behavior when hotel list API returns an empty response")
     @Severity(SeverityLevel.CRITICAL)
-    @Description("Simulates a situation where the hotel list API returns no results and verifies the UI handles it gracefully with proper messaging and visible filters.")
+    @Description("Simulates a situation where the hotel list API returns no results" +
+            " and verifies the UI handles it gracefully with proper messaging" +
+            " and visible filters.")
     @Link(name = "Booking App", url = "https://booking.com")
     @Test(priority = 1)
     public void testEmptyHotelListResponse() {
@@ -46,7 +48,9 @@ public class BookingMockTests extends BrowserInjection {
     @Feature("Delayed API Response")
     @Story("Verify loading behavior and UI stability when API response is delayed")
     @Severity(SeverityLevel.NORMAL)
-    @Description("Simulates a delayed response from the hotel search API to ensure the loader appears and disappears correctly and results are shown.")
+    @Description("Simulates a delayed response from the hotel search API " +
+            "to ensure the loader appears and disappears correctly " +
+            "and results are shown.")
     @Link(name = "Booking App", url = "https://booking.com")
     @Test(priority = 2)
     public void testDelayedApiResponse() {
@@ -80,7 +84,9 @@ public class BookingMockTests extends BrowserInjection {
     @Feature("Server Error Handling")
     @Story("Ensure the application responds properly to server-side errors")
     @Severity(SeverityLevel.CRITICAL)
-    @Description("Simulates a server error during hotel search and checks for proper error display, retry option, and logging behavior.")
+    @Description("Simulates a server error during hotel search " +
+            "and checks for proper error display, retry option," +
+            " and logging behavior.")
     @Link(name = "Booking App", url = "https://booking.com")
     @Test(priority = 3)
     public void testServerError() {
