@@ -5,8 +5,6 @@ import com.microsoft.playwright.Page;
 
 public class DetailsPage {
     public Locator title,
-            reviewScore,
-            location,
             reserveButton,
             overview;
 

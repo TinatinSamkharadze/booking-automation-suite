@@ -25,6 +25,8 @@ public class DataDrivenTests extends BaseTest {
             "correctly reflect the input parameters.")
     public void searchFormTest(BookingCase bookingCase) {
         homeSteps
+                .waitForLoadState()
+                .hideGoogleOneTap()
                 .setViewportSize(WIDTH_FOR_DESKTOP, HEIGHT_FOR_DESKTOP)
                 .validateSearchBarIsClear()
                 .searchLocation(bookingCase.getDestination())
@@ -41,6 +43,8 @@ public class DataDrivenTests extends BaseTest {
                 .selectGuests(bookingCase.getGuests())
                 .clickSearchButton();
         listingSteps
+                .waitElementToBeStable()
+                .hideGoogleOneTap()
                 .validateResultsLocationIsCorrect(bookingCase.getDestination())
                 .validateCheckIn(bookingCase.getCheckIn())
                 .validateCheckOut(bookingCase.getCheckOut())

@@ -20,6 +20,8 @@ public class BookingMockTests extends BrowserInjection {
         interceptSearchResultsApi();
         page.navigate(BOOKING_BASE_URL);
         homeSteps
+                .waitForLoadState()
+                .hideGoogleOneTap()
                 .validateSearchBarIsClear()
                 .searchLocation(NARA)
                 .waitForLocationOptionsToAppear()
@@ -30,6 +32,8 @@ public class BookingMockTests extends BrowserInjection {
                 .selectCheckOutDay(CHECKOUT_DAY_1)
                 .clickSearchButton();
         listingSteps
+                .waitElementToBeStable()
+                .hideGoogleOneTap()
                 .waitForResultsToAppear()
                 .validateResultsAfterApplyingRating(PropertyRating.FIVE_STARS)
                 .waitForResultsToAppear()
@@ -49,6 +53,8 @@ public class BookingMockTests extends BrowserInjection {
         simulateSlowSearchResultsAPI();
         page.navigate(BOOKING_BASE_URL);
         homeSteps
+                .waitForLoadState()
+                .hideGoogleOneTap()
                 .validateSearchBarIsClear()
                 .searchLocation(KYOTO)
                 .waitForLocationOptionsToAppear()
@@ -62,6 +68,8 @@ public class BookingMockTests extends BrowserInjection {
                 .clickSearchButton()
                 .validateLoaderIsVisible();
         listingSteps
+                .waitElementToBeStable()
+                .hideGoogleOneTap()
                 .validateLoaderDisappear()
                 .validateResultsAppear()
                 .validateFiltersAreVisible()
@@ -79,6 +87,8 @@ public class BookingMockTests extends BrowserInjection {
         simulateHotelListServerError();
         page.navigate(BOOKING_BASE_URL);
         homeSteps
+                .waitForLoadState()
+                .hideGoogleOneTap()
                 .validateSearchBarIsClear()
                 .searchLocation(OSAKA)
                 .waitForLocationOptionsToAppear()
@@ -92,6 +102,8 @@ public class BookingMockTests extends BrowserInjection {
                 .clickSearchButton()
                 .validateLoaderIsVisible();
         listingSteps
+                .waitElementToBeStable()
+                .hideGoogleOneTap()
                 .validateToastAlert()
                 .validateRetryButton()
                 .validateProperLogging()

@@ -233,5 +233,12 @@ public class HomeSteps {
         return this;
     }
 
-
+    @Step("Hide Google One Tap popup")
+    public HomeSteps hideGoogleOneTap()
+    {
+        homePage.page.evaluate(
+                "const el = document.querySelector('.google-one-tap-wrapper'); if (el) el.style.display = 'none';"
+        );
+        return this;
+    }
 }

@@ -24,6 +24,8 @@ public class UIResponsivenessTests extends BaseTest {
     public void desktopResponsiveTest() {
         homeSteps
                 .setViewportSize(WIDTH_FOR_DESKTOP, HEIGHT_FOR_DESKTOP)
+                .waitForLoadState()
+                .hideGoogleOneTap()
                 .validateNavBarIsVisible()
                 .validateSearchBarIsVisible()
                 .scrollToBottom()
@@ -46,6 +48,8 @@ public class UIResponsivenessTests extends BaseTest {
                 .selectGuests(GUESTS)
                 .clickSearchButton();
         listingSteps
+                .waitElementToBeStable()
+                .hideGoogleOneTap()
                 .changeToGrid()
                 .waitElementToBeStable()
                 .scrollThroughPropertyCards()
@@ -64,6 +68,8 @@ public class UIResponsivenessTests extends BaseTest {
     public void tabletResponsiveTest() {
         homeSteps
                 .setViewportSize(WIDTH_FOR_TABLET, HEIGHT_FOR_TABLET)
+                .waitForLoadState()
+                .hideGoogleOneTap()
                 .validateNavBarIsVisible()
                 .validateSearchBarIsVisible()
                 .validateHamburgerMenuIsVisible()
@@ -75,6 +81,8 @@ public class UIResponsivenessTests extends BaseTest {
                 .scrollToTop()
                 .clickSearchButton();
         listingSteps
+                .waitElementToBeStable()
+                .hideGoogleOneTap()
                 .changeToGrid()
                 .waitElementToBeStable()
                 .scrollThroughPropertyCards()
@@ -92,6 +100,8 @@ public class UIResponsivenessTests extends BaseTest {
     public void mobileResponsivenessTest() {
         homeSteps
                 .setViewportSize(WIDTH_FOR_MOBILE, HEIGHT_FOR_MOBILE)
+                .waitForLoadState()
+                .hideGoogleOneTap()
                 .validateNavBarIsVisible()
                 .validateSearchBarIsVisible()
                 .validateFooterLinksAreVertical()
@@ -102,6 +112,8 @@ public class UIResponsivenessTests extends BaseTest {
                 .scrollToTop()
                 .clickSearchButton();
         listingSteps
+                .waitElementToBeStable()
+                .hideGoogleOneTap()
                 .changeToGrid()
                 .waitElementToBeStable()
                 .scrollThroughPropertyCards()

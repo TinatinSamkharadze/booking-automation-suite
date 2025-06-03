@@ -8,7 +8,7 @@ import ge.tbc.testautomation.data.enums.PropertyRating;
 import ge.tbc.testautomation.data.enums.PropertyType;
 
 public class ListingPage {
-    private final Page page;
+    public final Page page;
     public Locator propertyCards,
             searchHeader,
             dismissButton,
@@ -25,10 +25,9 @@ public class ListingPage {
             retryButton,
             logging,
             occupancy,
-            desktopGrid,
             cardContainer,
             bookingLogo,
-    loginPopUp;
+            loginPopUp;
 
     public ListingPage(Page page) {
         this.page = page;

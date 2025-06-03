@@ -109,7 +109,7 @@ public class ListingSteps {
 
     @Step("Waiting element to become stable")
     public ListingSteps waitElementToBeStable() {
-        page.waitForTimeout(3000);
+        page.waitForTimeout(4000);
         return this;
     }
 
@@ -298,6 +298,15 @@ public class ListingSteps {
     @Step("Scrolling to the top of the page")
     public ListingSteps scrollToTop() {
         page.evaluate("() => window.scrollTo(0, 0)");
+        return this;
+    }
+
+    @Step("Hide Google One Tap popup")
+    public ListingSteps hideGoogleOneTap()
+    {
+        listingPage.page.evaluate(
+                "const el = document.querySelector('.google-one-tap-wrapper'); if (el) el.style.display = 'none';"
+        );
         return this;
     }
 }

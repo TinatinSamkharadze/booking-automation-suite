@@ -15,6 +15,9 @@ import static ge.tbc.testautomation.data.Constants.*;
 @Epic("Booking Core Functionality")
 public class CoreFunctionalityTests extends BaseTest {
 
+    //თუ BaseTest-ში დავწერდი page.navigate()-ს,
+    // ყველა ტესტისთვის ავტომატურად შესრულდებოდა ნავიგაცია, მათ შორის mock ტესტებისთვისაც
+    //რადგან mock-ები უნდა იყოს კონფიგურირებული ნავიგაციამდე ამიტომ აქ დავწერე
     @BeforeClass
     public void navigateToApplication() {
         page.navigate(BOOKING_BASE_URL);
@@ -29,11 +32,14 @@ public class CoreFunctionalityTests extends BaseTest {
     public void searchTest() {
         homeSteps
                 .setViewportSize(WIDTH_FOR_DESKTOP, HEIGHT_FOR_DESKTOP)
+                .hideGoogleOneTap()
                 .searchLocation(KYOTO)
                 .selectLocationOption(KYOTO)
                 .clickOnCalendar()
                 .clickSearchButton();
         listingSteps
+                .waitElementToBeStable()
+                .hideGoogleOneTap()
                 .waitForResultsToAppear()
                 .validateResultsAppear()
                 .validateSearchHeaderContainsCorrectText(KYOTO)
@@ -52,12 +58,16 @@ public class CoreFunctionalityTests extends BaseTest {
     @Retry(maxRetries = 1)
     public void dateSelectionTest() {
         homeSteps
+                .waitForLoadState()
+                .hideGoogleOneTap()
                 .ifNotVisibleClickOnCalendar()
                 .clickNextMonthButton()
                 .selectCheckInDate(FIRST_DAY_OF_MONTH)
                 .selectCheckOutDay(LAST_DAY_OF_MONTH)
                 .clickSearchButton();
         listingSteps
+                .waitElementToBeStable()
+                .hideGoogleOneTap()
                 .waitForResultsToAppear()
                 .validateCheckInDate(FIRST_DAY_OF_MONTH)
                 .validateCheckOutDate(LAST_DAY_OF_MONTH)
@@ -74,6 +84,8 @@ public class CoreFunctionalityTests extends BaseTest {
     @Retry(maxRetries = 1)
     public void filterApplicationTest() {
         homeSteps
+                .waitForLoadState()
+                .hideGoogleOneTap()
                 .clickOccupancy()
                 .waitOccupancyPanelToBeVisible()
                 .selectGuests(GUESTS)
@@ -81,6 +93,7 @@ public class CoreFunctionalityTests extends BaseTest {
         listingSteps
                 .waitForResultsToAppear()
                 .waitElementToBeStable()
+                .hideGoogleOneTap()
                 .selectPropertyType(PropertyType.HOTELS)
                 .waitForResultsToAppear()
                 .waitElementToBeStable()
@@ -106,8 +119,12 @@ public class CoreFunctionalityTests extends BaseTest {
     @Test(priority = 4)
     public void sortByReviewScoreTest() {
         homeSteps
+                .waitForLoadState()
+                .hideGoogleOneTap()
                 .clickSearchButton();
         listingSteps
+                .waitElementToBeStable()
+                .hideGoogleOneTap()
                 .waitForResultsToAppear()
                 .clickSortButton()
                 .clickOnPropertyRatingTopReviewed()
@@ -126,10 +143,13 @@ public class CoreFunctionalityTests extends BaseTest {
     @Test(dependsOnMethods = {"sortByReviewScoreTest"}, priority = 5)
     public void propertyDetailsConsistencyTest() {
         homeSteps
+                .waitForLoadState()
+                .hideGoogleOneTap()
                 .clickSearchButton();
         listingSteps
                 .waitForResultsToAppear()
                 .waitElementToBeStable()
+                .hideGoogleOneTap()
                 .captureFirstPropertyDetails()
                 .clickOnFirstPropertyCard();
         detailsSteps
