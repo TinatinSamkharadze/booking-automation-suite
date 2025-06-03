@@ -8,7 +8,6 @@ import org.testng.annotations.Test;
 import static ge.tbc.testautomation.data.Constants.*;
 
 @Epic("UI Responsiveness")
-@Feature("Responsive Design")
 public class UIResponsivenessTests extends BaseTest {
     @BeforeClass
     public void navigateToApplication() {
@@ -20,6 +19,7 @@ public class UIResponsivenessTests extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     @Description("Validates that the application layout, header, footer, and elements are correctly displayed and functional on desktop viewports.")
     @Link(name = "Booking App", url = "https://booking.com")
+    @Feature("Desktop Responsiveness")
     @Test(priority = 1)
     public void desktopResponsiveTest() {
         homeSteps
@@ -37,9 +37,10 @@ public class UIResponsivenessTests extends BaseTest {
                 .searchLocation(OSAKA)
                 .waitForLocationOptionsToAppear()
                 .selectLocationOption(OSAKA)
-                .ifNotVisibleClickOnCalendar()
+                .clickNextMonthButton()
                 .selectCheckInDate(FIRST_DAY_OF_MONTH)
                 .selectCheckOutDay(LAST_DAY_OF_MONTH)
+                .validateDateIsSelected()
                 .clickOccupancy()
                 .waitOccupancyPanelToBeVisible()
                 .selectGuests(GUESTS)
@@ -58,6 +59,7 @@ public class UIResponsivenessTests extends BaseTest {
     @Severity(SeverityLevel.NORMAL)
     @Description("Validates the correct rendering and behavior of UI components on tablet screen resolutions.")
     @Link(name = "Booking App", url = "https://booking.com")
+    @Feature("Tablet Responsiveness")
     @Test(priority = 2)
     public void tabletResponsiveTest() {
         homeSteps
@@ -85,6 +87,7 @@ public class UIResponsivenessTests extends BaseTest {
     @Severity(SeverityLevel.NORMAL)
     @Description("Ensures the UI adapts properly to smaller mobile devices and critical elements are accessible.")
     @Link(name = "Booking App", url = "https://booking.com")
+    @Feature("Mobile Responsiveness")
     @Test(priority = 3)
     public void mobileResponsivenessTest() {
         homeSteps

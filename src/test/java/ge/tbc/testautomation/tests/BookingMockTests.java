@@ -1,21 +1,21 @@
 package ge.tbc.testautomation.tests;
 
 import ge.tbc.testautomation.data.enums.PropertyRating;
-import ge.tbc.testautomation.runners.BaseTestForMock;
+import ge.tbc.testautomation.runners.BrowserInjection;
 import io.qameta.allure.*;
 import org.testng.annotations.Test;
 
 import static ge.tbc.testautomation.data.Constants.*;
 
 @Epic("Mock API Testing")
-public class BookingMockTests extends BaseTestForMock {
+public class BookingMockTests extends BrowserInjection {
 
     @Feature("Empty Search Results")
     @Story("Validate system behavior when hotel list API returns an empty response")
     @Severity(SeverityLevel.CRITICAL)
     @Description("Simulates a situation where the hotel list API returns no results and verifies the UI handles it gracefully with proper messaging and visible filters.")
     @Link(name = "Booking App", url = "https://booking.com")
-    @Test
+    @Test(priority = 1)
     public void testEmptyHotelListResponse() {
         interceptSearchResultsApi();
         page.navigate(BOOKING_BASE_URL);
@@ -24,7 +24,7 @@ public class BookingMockTests extends BaseTestForMock {
                 .searchLocation(NARA)
                 .waitForLocationOptionsToAppear()
                 .selectLocationOption(NARA)
-                .ifNotVisibleClickOnCalendar()
+                .waitForLoadState()
                 .clickNextMonthButton()
                 .selectCheckInDate(CHECKIN_DAY_ONE)
                 .selectCheckOutDay(CHECKOUT_DAY_1)
@@ -35,7 +35,8 @@ public class BookingMockTests extends BaseTestForMock {
                 .waitForResultsToAppear()
                 .validateErrorMessage()
                 .validateFiltersAreVisible()
-                .validateErrorMessage();
+                .validateErrorMessage()
+                .validatePageDidNotCrash();
     }
 
     @Feature("Delayed API Response")
@@ -43,7 +44,7 @@ public class BookingMockTests extends BaseTestForMock {
     @Severity(SeverityLevel.NORMAL)
     @Description("Simulates a delayed response from the hotel search API to ensure the loader appears and disappears correctly and results are shown.")
     @Link(name = "Booking App", url = "https://booking.com")
-    @Test
+    @Test(priority = 2)
     public void testDelayedApiResponse() {
         simulateSlowSearchResultsAPI();
         page.navigate(BOOKING_BASE_URL);
@@ -52,8 +53,10 @@ public class BookingMockTests extends BaseTestForMock {
                 .searchLocation(KYOTO)
                 .waitForLocationOptionsToAppear()
                 .selectLocationOption(KYOTO)
+                .waitForLoadState()
                 .ifNotVisibleClickOnCalendar()
                 .clickNextMonthButton()
+                .waitNextMonthDatesToBeVisible()
                 .selectCheckInDate(CHECKIN_DAY_TWO)
                 .selectCheckOutDay(CHECKOUT_DAY_2)
                 .clickSearchButton()
@@ -61,7 +64,8 @@ public class BookingMockTests extends BaseTestForMock {
         listingSteps
                 .validateLoaderDisappear()
                 .validateResultsAppear()
-                .validateFiltersAreVisible();
+                .validateFiltersAreVisible()
+                .validatePageDidNotCrash();
 
     }
 
@@ -70,16 +74,19 @@ public class BookingMockTests extends BaseTestForMock {
     @Severity(SeverityLevel.CRITICAL)
     @Description("Simulates a server error during hotel search and checks for proper error display, retry option, and logging behavior.")
     @Link(name = "Booking App", url = "https://booking.com")
-    @Test
+    @Test(priority = 3)
     public void testServerError() {
         simulateHotelListServerError();
         page.navigate(BOOKING_BASE_URL);
         homeSteps
+                .validateSearchBarIsClear()
                 .searchLocation(OSAKA)
                 .waitForLocationOptionsToAppear()
                 .selectLocationOption(OSAKA)
+                .waitForLoadState()
                 .ifNotVisibleClickOnCalendar()
                 .clickNextMonthButton()
+                .waitNextMonthDatesToBeVisible()
                 .selectCheckInDate(CHECKING_DAY_THREE)
                 .selectCheckOutDay(CHECKOUT_DAY_3)
                 .clickSearchButton()
@@ -87,6 +94,7 @@ public class BookingMockTests extends BaseTestForMock {
         listingSteps
                 .validateToastAlert()
                 .validateRetryButton()
-                .validateProperLogging();
+                .validateProperLogging()
+                .validatePageDidNotCrash();
     }
 }

@@ -50,10 +50,8 @@ public class ListingSteps {
     public ListingSteps scrollThroughPropertyCards() {
         Locator propertyCards = listingPage.propertyCards;
         int count = propertyCards.count();
-        IntStream.range(0, count)
-                .mapToObj(propertyCards::nth)
+        IntStream.range(0, count).mapToObj(propertyCards::nth)
                 .forEach(Locator::scrollIntoViewIfNeeded);
-
         return this;
     }
 
@@ -66,12 +64,11 @@ public class ListingSteps {
         );
     }
 
-   @Step("Validating results location is correct: {searchText}")
+    @Step("Validating results location is correct: {searchText}")
     public ListingSteps validateResultsLocationIsCorrect(String searchText) {
         Locator propertyCards = listingPage.propertyCards;
         int count = propertyCards.count();
-        IntStream.range(0, count)
-                .mapToObj(i -> propertyCards.nth(i))
+        IntStream.range(0, count).mapToObj(i -> propertyCards.nth(i))
                 .forEach(card -> assertThat(card).containsText(searchText));
         return this;
     }
@@ -89,7 +86,7 @@ public class ListingSteps {
     }
 
 
-    @Step("Select property type {propertyType")
+    @Step("Select property type {propertyType}")
     public ListingSteps selectPropertyType(PropertyType propertyType) {
         Locator checkbox = listingPage.getPropertyTypeCheckbox(propertyType);
         checkbox.check();
@@ -103,7 +100,7 @@ public class ListingSteps {
         return this;
     }
 
-    @Step("Select reservation policy: {reservation policy}")
+    @Step("Select reservation policy: {reservationPolicy}")
     public ListingSteps selectReservationPolicy(ReservationPolicy reservationPolicy) {
         Locator checkbox = listingPage.getReservationPolicyCheckbox(reservationPolicy);
         checkbox.check();
@@ -126,10 +123,8 @@ public class ListingSteps {
     public ListingSteps validateResultsAfterApplyingRating(PropertyRating propertyRating) {
         Locator propertyCards = listingPage.propertyCards;
         int count = propertyCards.count();
-        IntStream.range(0, count)
-                .mapToObj(i -> propertyCards.nth(i))
+        IntStream.range(0, count).mapToObj(i -> propertyCards.nth(i))
                 .forEach(card -> assertThat(card).containsText(propertyRating.getLabel()));
-
         return this;
     }
 
@@ -137,8 +132,7 @@ public class ListingSteps {
     public ListingSteps validateResultsAfterApplyingPropertyType(PropertyType propertyType) {
         Locator propertyCards = listingPage.propertyCards;
         int count = propertyCards.count();
-        IntStream.range(0, count)
-                .mapToObj(i -> propertyCards.nth(i))
+        IntStream.range(0, count).mapToObj(i -> propertyCards.nth(i))
                 .forEach(card -> assertThat(card).containsText(propertyType.getLabel()));
         return this;
     }
@@ -147,8 +141,7 @@ public class ListingSteps {
     public ListingSteps validateResultsAfterApplyingReservationPolicy(ReservationPolicy reservationPolicy) {
         Locator propertyCards = listingPage.propertyCards;
         int count = propertyCards.count();
-        IntStream.range(0, count)
-                .mapToObj(i -> propertyCards.nth(i))
+        IntStream.range(0, count).mapToObj(i -> propertyCards.nth(i))
                 .forEach(card -> assertThat(card).containsText(reservationPolicy.getLabel()));
         return this;
     }
@@ -169,11 +162,9 @@ public class ListingSteps {
 
     @Step("Validating property cards are correctly filtered")
     public ListingSteps validatePropertyCardsAreCorrectlyFiltered() {
-        listingPage.propertyCards.first().waitFor();
         Locator propertyCards = listingPage.propertyCards;
         int count = propertyCards.count();
-        IntStream.range(0, count)
-                .mapToObj(i -> propertyCards.nth(i))
+        IntStream.range(0, count).mapToObj(i -> propertyCards.nth(i))
                 .forEach(this::validateCardRating);
         return this;
     }
@@ -210,8 +201,7 @@ public class ListingSteps {
         int count = reviewScoreLocatorGroup.count();
         for (int i = 0; i < count; i++) {
             Locator scoreLocator = reviewScoreLocatorGroup.nth(i);
-            assertThat(scoreLocator)
-                    .containsText(Pattern.compile("9\\.|8\\."));
+            assertThat(scoreLocator).containsText(Pattern.compile("9\\.|8\\."));
         }
         return this;
     }
@@ -291,20 +281,16 @@ public class ListingSteps {
     @Step("Validating grid layout: {expectedPerRow}")
     public ListingSteps validateGridLayout(int expectedPerRow) {
         int totalCards = listingPage.propertyCards.count();
-        int expectedRows = (int) Math.ceil((double) totalCards / expectedPerRow);
-        for (int row = 0; row < expectedRows; row++) {
-            int firstCardIndex = row * expectedPerRow;
-            if (firstCardIndex < totalCards) {
-                Locator firstCardInRow = listingPage.propertyCards.nth(firstCardIndex);
-                assertThat(firstCardInRow).isVisible();
-            }
-        }
+        IntStream.iterate(0, i -> i < totalCards, i -> i + expectedPerRow)
+                .forEach(firstCardIndex -> {
+                    Locator firstCardInRow = listingPage.propertyCards.nth(firstCardIndex);
+                    assertThat(firstCardInRow).isVisible();
+                });
         return this;
     }
 
     @Step("Navigating back to home page")
-    public ListingSteps navigateToHomePage()
-    {
+    public ListingSteps navigateToHomePage() {
         listingPage.bookingLogo.click();
         return this;
     }

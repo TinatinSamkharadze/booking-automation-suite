@@ -27,7 +27,8 @@ public class ListingPage {
             occupancy,
             desktopGrid,
             cardContainer,
-            bookingLogo;
+            bookingLogo,
+    loginPopUp;
 
     public ListingPage(Page page) {
         this.page = page;
@@ -49,6 +50,7 @@ public class ListingPage {
         this.occupancy = page.getByTestId("occupancy-config").first();
         this.cardContainer = page.getByRole(AriaRole.LIST).first();
         this.bookingLogo = page.getByTestId("header-booking-logo");
+        this.loginPopUp = page.locator("#close");
     }
 
     public String locationSelector = "[data-testid='address']";

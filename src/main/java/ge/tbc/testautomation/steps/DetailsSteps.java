@@ -40,7 +40,6 @@ public class DetailsSteps {
 
     @Step("Going to details page")
     public DetailsSteps goToDetailsPage() {
-        waitPageToLoad();
         Page newPage = page.context().pages().get(page.context().pages().size() - 1);
         newPage.bringToFront();
         return new DetailsSteps(newPage, testContext);
@@ -82,8 +81,7 @@ public class DetailsSteps {
     }
 
     @Step("Validating room type is matching listing page's room type")
-    public DetailsSteps assertRoomTypeMatchesListing()
-    {
+    public DetailsSteps assertRoomTypeMatchesListing() {
         String expectedRoomType = extractCityFromLocation(testContext.getExpectedOffer().roomType.getContent());
         assertThat(testContext.getActualOffer().roomType.getLocator().first()).containsText(expectedRoomType);
         return this;

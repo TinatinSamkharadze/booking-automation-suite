@@ -15,7 +15,7 @@ public class Constants {
             CHECKOUT_DAY_3 = "27",
             OSAKA = "Osaka",
             NARA = "Nara",
-           LISTING_PAGE = "https://shorturl.at/nMbcd";
+            LISTING_PAGE = "https://shorturl.at/nMbcd";
     public static int WIDTH_FOR_DESKTOP = 1920,
             HEIGHT_FOR_DESKTOP = 1080,
             WIDTH_FOR_TABLET = 768,
@@ -25,5 +25,5 @@ public class Constants {
             DESKTOP_GRID_LAYOUT = 3,
             TABLET_GRID_LAYOUT = 2,
             MOBILE_GRID_LAYOUT = 1,
-    GUESTS = 2;
+            GUESTS = 2;
 }

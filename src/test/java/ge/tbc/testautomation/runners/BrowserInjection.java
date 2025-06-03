@@ -3,7 +3,7 @@ package ge.tbc.testautomation.runners;
 import com.microsoft.playwright.Route;
 import ge.tbc.testautomation.utils.FileUtil;
 
-public class BaseTestForMock extends BaseTest {
+public class BrowserInjection extends BaseTest {
     String mockResponse = FileUtil.loadJson("src/main/resources/data.json");
     String serverErrorResponse = FileUtil.loadJson("src/main/resources/error_handling_test.json");
 

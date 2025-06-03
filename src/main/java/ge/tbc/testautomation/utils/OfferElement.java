@@ -1,7 +1,11 @@
 package ge.tbc.testautomation.utils;
 
 import com.microsoft.playwright.Locator;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 
+@Data
+@AllArgsConstructor
 public class OfferElement {
     private final String content;
     private final Locator locator;

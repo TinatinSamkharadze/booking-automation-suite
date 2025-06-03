@@ -5,7 +5,7 @@ import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
 
 public class HomePage {
-    private final Page page;
+    public final Page page;
     public Locator searchBar,
             searchButton,
             calendar,
@@ -26,7 +26,10 @@ public class HomePage {
             minus,
             plus,
             firstOption,
-            loader;
+            loader,
+            selectedDate,
+            loginPopUp,
+            registrationWindow;
 
     public HomePage(Page page) {
         this.page = page;
@@ -48,6 +51,9 @@ public class HomePage {
         this.plus = page.locator(".de576f5064.b46cd7aad7.e26a59bb37.c295306d66.c7a901b0e7.aaf9b6e287.dc8366caa6").first();
         this.firstOption = page.locator("#autocomplete-result-0");
         this.loader = page.locator("[data-testid='loader-container']");
+        this.selectedDate = page.locator("//span[@aria-pressed ='true']").first();
+        this.loginPopUp = page.locator(".TvD9Pc-Bz112c.ZYIfFd-aGxpHf-FnSee");
+        this.registrationWindow = page.locator(".google-one-tap-wrapper");
 
     }
 

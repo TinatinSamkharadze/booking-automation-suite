@@ -8,6 +8,7 @@ import io.qameta.allure.Step;
 
 import java.sql.Date;
 import java.util.Calendar;
+import java.util.stream.IntStream;
 
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 
@@ -152,6 +153,7 @@ public class HomeSteps {
         PlaywrightAssertions.assertThat(links.nth(1)).hasCSS("top", firstTop);
         return this;
     }
+
     @Step("Validating footer links are vertically aligned")
     public HomeSteps validateFooterLinksAreVertical() {
         Locator links = homePage.footers;
@@ -191,19 +193,12 @@ public class HomeSteps {
     @Step("Select desired number of guests: {guestCount}")
     public HomeSteps selectGuests(int guestCount) {
         int currentCount = 2;
-        if (guestCount > currentCount) {
-            int clicksNeeded = guestCount - currentCount;
-            for (int i = 0; i < clicksNeeded; i++) {
-                homePage.plus.click();
-            }
-        } else if (guestCount < currentCount) {
-            int clicksNeeded = currentCount - guestCount;
-            for (int i = 0; i < clicksNeeded; i++) {
-                homePage.minus.click();
-            }
-        }
+        int difference = guestCount - currentCount;
+        IntStream.range(0, Math.abs(difference))
+                .forEach(i -> (difference > 0 ? homePage.plus : homePage.minus).click());
         return this;
     }
+
     @Step("Validating calendar container is visible")
     public HomeSteps validateCalendarContainerIsVisible() {
         assertThat(homePage.calendarContainer).isVisible();
@@ -212,17 +207,31 @@ public class HomeSteps {
 
     @Step("Clicking on the calendar if it is not visible")
     public HomeSteps ifNotVisibleClickOnCalendar() {
-        if (homePage.calendarContainer.isHidden()) {
+        try {
+            assertThat(homePage.calendarContainer).not().isVisible();
             homePage.calendar.click();
+        } catch (AssertionError e) {
         }
         return this;
     }
 
+    @Step("Waiting next month dates to be visible")
+    public HomeSteps waitNextMonthDatesToBeVisible() {
+        page.waitForTimeout(2000);
+        return this;
+    }
+
     @Step("Validating loader is visible")
-    public HomeSteps validateLoaderIsVisible()
-    {
+    public HomeSteps validateLoaderIsVisible() {
         assertThat(homePage.loader).isHidden();
         return this;
     }
+
+    @Step("Validating date is selected")
+    public HomeSteps validateDateIsSelected() {
+        assertThat(homePage.selectedDate).isVisible();
+        return this;
+    }
+
 
 }

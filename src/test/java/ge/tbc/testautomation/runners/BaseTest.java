@@ -8,7 +8,6 @@ import ge.tbc.testautomation.steps.ListingSteps;
 import io.qameta.allure.Attachment;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
-import org.testng.asserts.SoftAssert;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -17,7 +16,6 @@ import java.nio.file.Paths;
 import java.util.Arrays;
 
 public class BaseTest {
-    public SoftAssert softAssert;
     public Playwright playwright;
     public Browser browser;
     public BrowserContext browserContext;
@@ -29,13 +27,14 @@ public class BaseTest {
     private boolean tracingEnabled = true;
     private static final String TRACE_DIR = "traces";
 
+
     @BeforeClass
     @Parameters({"browserType"})
     public void setUp(@Optional("chromium") String browserType) {
         playwright = Playwright.create();
         BrowserType.LaunchOptions launchOptions = new BrowserType.LaunchOptions();
         launchOptions.setArgs(Arrays.asList("--disable-gpu", "--disable-extensions", "--start-maximized"));
-        launchOptions.setHeadless(false);
+        launchOptions.setHeadless(true);
 
         if (browserType.equalsIgnoreCase("chromium")) {
             browser = playwright.chromium().launch(launchOptions);
@@ -71,7 +70,6 @@ public class BaseTest {
         this.sharedContext = new TestContext();
         this.listingSteps = new ListingSteps(page, sharedContext);
         this.detailsSteps = new DetailsSteps(page, sharedContext);
-        this.softAssert = new SoftAssert();
     }
 
     @AfterClass

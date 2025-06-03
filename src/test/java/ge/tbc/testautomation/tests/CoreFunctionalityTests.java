@@ -34,11 +34,13 @@ public class CoreFunctionalityTests extends BaseTest {
                 .clickOnCalendar()
                 .clickSearchButton();
         listingSteps
+                .waitForResultsToAppear()
                 .validateResultsAppear()
                 .validateSearchHeaderContainsCorrectText(KYOTO)
                 .waitElementToBeStable()
                 .scrollThroughPropertyCards()
                 .validateResultsLocationIsCorrect(KYOTO);
+
     }
 
     @Feature("Date Selection")
@@ -56,6 +58,7 @@ public class CoreFunctionalityTests extends BaseTest {
                 .selectCheckOutDay(LAST_DAY_OF_MONTH)
                 .clickSearchButton();
         listingSteps
+                .waitForResultsToAppear()
                 .validateCheckInDate(FIRST_DAY_OF_MONTH)
                 .validateCheckOutDate(LAST_DAY_OF_MONTH)
                 .validateResultsAppear();
@@ -76,6 +79,7 @@ public class CoreFunctionalityTests extends BaseTest {
                 .selectGuests(GUESTS)
                 .clickSearchButton();
         listingSteps
+                .waitForResultsToAppear()
                 .waitElementToBeStable()
                 .selectPropertyType(PropertyType.HOTELS)
                 .waitForResultsToAppear()
@@ -129,6 +133,7 @@ public class CoreFunctionalityTests extends BaseTest {
                 .captureFirstPropertyDetails()
                 .clickOnFirstPropertyCard();
         detailsSteps
+                .waitPageToLoad()
                 .goToDetailsPage()
                 .scrollToTop()
                 .validateWeAreOnDetailsPage()
