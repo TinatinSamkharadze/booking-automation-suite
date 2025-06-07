@@ -26,7 +26,8 @@ public class HomePage {
             loader,
             selectedDate,
             loginPopUp,
-            registrationWindow;
+            registrationWindow,
+            dialog;
 
     public HomePage(Page page) {
         this.page = page;
@@ -51,6 +52,7 @@ public class HomePage {
         this.selectedDate = page.locator("//span[@aria-pressed ='true']").first();
         this.loginPopUp = page.locator(".TvD9Pc-Bz112c.ZYIfFd-aGxpHf-FnSee");
         this.registrationWindow = page.locator(".google-one-tap-wrapper");
+        this.dialog = page.getByRole(AriaRole.DIALOG).first();
 
     }
 

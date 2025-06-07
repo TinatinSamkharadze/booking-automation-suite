@@ -33,12 +33,15 @@ public class CoreFunctionalityTests extends BaseTest {
     public void searchTest() {
         homeSteps
                 .setViewportSize(WIDTH_FOR_DESKTOP, HEIGHT_FOR_DESKTOP)
+                .waitForLoadState()
+                .hideDialog()
                 .hideGoogleOneTap()
                 .searchLocation(KYOTO)
                 .selectLocationOption(KYOTO)
                 .clickOnCalendar()
                 .clickSearchButton();
         listingSteps
+                .hideDialog()
                 .waitElementToBeStable()
                 .hideGoogleOneTap()
                 .waitForResultsToAppear()
@@ -61,6 +64,7 @@ public class CoreFunctionalityTests extends BaseTest {
     public void dateSelectionTest() {
         homeSteps
                 .waitForLoadState()
+                .hideDialog()
                 .hideGoogleOneTap()
                 .ifNotVisibleClickOnCalendar()
                 .clickNextMonthButton()
@@ -69,6 +73,7 @@ public class CoreFunctionalityTests extends BaseTest {
                 .clickSearchButton();
         listingSteps
                 .waitElementToBeStable()
+                .hideDialog()
                 .hideGoogleOneTap()
                 .waitForResultsToAppear()
                 .validateCheckInDate(FIRST_DAY_OF_MONTH)
@@ -88,6 +93,7 @@ public class CoreFunctionalityTests extends BaseTest {
     public void filterApplicationTest() {
         homeSteps
                 .waitForLoadState()
+                .hideDialog()
                 .hideGoogleOneTap()
                 .clickOccupancy()
                 .waitOccupancyPanelToBeVisible()
@@ -96,6 +102,7 @@ public class CoreFunctionalityTests extends BaseTest {
         listingSteps
                 .waitForResultsToAppear()
                 .waitElementToBeStable()
+                .hideDialog()
                 .hideGoogleOneTap()
                 .selectPropertyType(PropertyType.HOTELS)
                 .waitForResultsToAppear()
@@ -124,10 +131,12 @@ public class CoreFunctionalityTests extends BaseTest {
     public void sortByReviewScoreTest() {
         homeSteps
                 .waitForLoadState()
+                .hideDialog()
                 .hideGoogleOneTap()
                 .clickSearchButton();
         listingSteps
                 .waitElementToBeStable()
+                .hideDialog()
                 .hideGoogleOneTap()
                 .waitForResultsToAppear()
                 .clickSortButton()
@@ -149,11 +158,13 @@ public class CoreFunctionalityTests extends BaseTest {
     public void propertyDetailsConsistencyTest() {
         homeSteps
                 .waitForLoadState()
+                .hideDialog()
                 .hideGoogleOneTap()
                 .clickSearchButton();
         listingSteps
                 .waitForResultsToAppear()
                 .waitElementToBeStable()
+                .hideDialog()
                 .hideGoogleOneTap()
                 .captureFirstPropertyDetails()
                 .clickOnFirstPropertyCard();

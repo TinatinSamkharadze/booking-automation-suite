@@ -241,4 +241,13 @@ public class HomeSteps {
         );
         return this;
     }
+
+    @Step("Hide dialog")
+    public HomeSteps hideDialog()
+    {
+        homePage.page.evaluate(
+                "const el = document.querySelector('.c1cb99b7ca'); if (el) el.style.display = 'none';"
+        );
+        return this;
+    }
 }
