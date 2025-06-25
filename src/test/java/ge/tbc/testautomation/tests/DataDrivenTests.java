@@ -29,6 +29,7 @@ public class DataDrivenTests extends BaseTest {
                 .waitForLoadState()
                 .hideDialog()
                 .hideGoogleOneTap()
+                .ifNotVisibleClickOnCalendar()
                 .setViewportSize(WIDTH_FOR_DESKTOP, HEIGHT_FOR_DESKTOP)
                 .validateSearchBarIsClear()
                 .searchLocation(bookingCase.getDestination())

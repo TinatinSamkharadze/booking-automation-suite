@@ -173,7 +173,6 @@ public class CoreFunctionalityTests extends BaseTest {
                 .scrollToTop()
                 .validateWeAreOnDetailsPage()
                 .captureActualPropertyDetails()
-//                .assertLocationMatchesListing()
                 .assertReviewScoreMatchesListing()
                 .assertTitleMatchesListing()
                 .assertRoomTypeMatchesListing();
