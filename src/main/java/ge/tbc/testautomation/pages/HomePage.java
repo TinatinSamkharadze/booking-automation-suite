@@ -27,7 +27,8 @@ public class HomePage {
             selectedDate,
             loginPopUp,
             registrationWindow,
-            dialog;
+            dialog,
+            singIn;
 
     public HomePage(Page page) {
         this.page = page;
@@ -53,6 +54,7 @@ public class HomePage {
         this.loginPopUp = page.locator(".TvD9Pc-Bz112c.ZYIfFd-aGxpHf-FnSee");
         this.registrationWindow = page.locator(".google-one-tap-wrapper");
         this.dialog = page.getByRole(AriaRole.DIALOG).first();
+        this.singIn = page.getByText("Sign in or Register");
 
     }
 

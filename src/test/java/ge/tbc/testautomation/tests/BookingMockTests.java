@@ -23,6 +23,7 @@ public class BookingMockTests extends BrowserInjection {
         page.navigate(BOOKING_BASE_URL);
         homeSteps
                 .waitForLoadState()
+                .hideDialog()
                 .hideGoogleOneTap()
                 .validateSearchBarIsClear()
                 .searchLocation(NARA)
@@ -35,6 +36,7 @@ public class BookingMockTests extends BrowserInjection {
                 .clickSearchButton();
         listingSteps
                 .waitElementToBeStable()
+                .hideDialog()
                 .hideGoogleOneTap()
                 .waitForResultsToAppear()
                 .validateResultsAfterApplyingRating(PropertyRating.FIVE_STARS)
@@ -58,6 +60,7 @@ public class BookingMockTests extends BrowserInjection {
         page.navigate(BOOKING_BASE_URL);
         homeSteps
                 .waitForLoadState()
+                .hideDialog()
                 .hideGoogleOneTap()
                 .validateSearchBarIsClear()
                 .searchLocation(KYOTO)
@@ -73,6 +76,7 @@ public class BookingMockTests extends BrowserInjection {
                 .validateLoaderIsVisible();
         listingSteps
                 .waitElementToBeStable()
+                .hideDialog()
                 .hideGoogleOneTap()
                 .validateLoaderDisappear()
                 .validateResultsAppear()
@@ -94,6 +98,7 @@ public class BookingMockTests extends BrowserInjection {
         page.navigate(BOOKING_BASE_URL);
         homeSteps
                 .waitForLoadState()
+                .hideDialog()
                 .hideGoogleOneTap()
                 .validateSearchBarIsClear()
                 .searchLocation(OSAKA)
@@ -109,6 +114,7 @@ public class BookingMockTests extends BrowserInjection {
                 .validateLoaderIsVisible();
         listingSteps
                 .waitElementToBeStable()
+                .hideDialog()
                 .hideGoogleOneTap()
                 .validateToastAlert()
                 .validateRetryButton()

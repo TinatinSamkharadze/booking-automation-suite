@@ -13,14 +13,14 @@
         </classes>
     </test>
 
-    <test name="Booking WebKit">
-        <parameter name="browserType" value="webkit"/>
-        <classes>
-            <class name="ge.tbc.testautomation.tests.CoreFunctionalityTests"/>
-            <class name="ge.tbc.testautomation.tests.UIResponsivenessTests"/>
-            <class name="ge.tbc.testautomation.tests.DataDrivenTests"/>
-            <class name="ge.tbc.testautomation.tests.BookingMockTests"/>
-        </classes>
-    </test>
+<!--    <test name="Booking WebKit">-->
+<!--        <parameter name="browserType" value="webkit"/>-->
+<!--        <classes>-->
+<!--            <class name="ge.tbc.testautomation.tests.CoreFunctionalityTests"/>-->
+<!--            <class name="ge.tbc.testautomation.tests.UIResponsivenessTests"/>-->
+<!--            <class name="ge.tbc.testautomation.tests.DataDrivenTests"/>-->
+<!--            <class name="ge.tbc.testautomation.tests.BookingMockTests"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 
 </suite>

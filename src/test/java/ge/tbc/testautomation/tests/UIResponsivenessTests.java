@@ -27,6 +27,7 @@ public class UIResponsivenessTests extends BaseTest {
         homeSteps
                 .setViewportSize(WIDTH_FOR_DESKTOP, HEIGHT_FOR_DESKTOP)
                 .waitForLoadState()
+                .hideDialog()
                 .hideGoogleOneTap()
                 .validateNavBarIsVisible()
                 .validateSearchBarIsVisible()
@@ -51,6 +52,7 @@ public class UIResponsivenessTests extends BaseTest {
                 .clickSearchButton();
         listingSteps
                 .waitElementToBeStable()
+                .hideDialog()
                 .hideGoogleOneTap()
                 .changeToGrid()
                 .waitElementToBeStable()
@@ -72,6 +74,7 @@ public class UIResponsivenessTests extends BaseTest {
         homeSteps
                 .setViewportSize(WIDTH_FOR_TABLET, HEIGHT_FOR_TABLET)
                 .waitForLoadState()
+                .hideDialog()
                 .hideGoogleOneTap()
                 .validateNavBarIsVisible()
                 .validateSearchBarIsVisible()
@@ -85,6 +88,7 @@ public class UIResponsivenessTests extends BaseTest {
                 .clickSearchButton();
         listingSteps
                 .waitElementToBeStable()
+                .hideDialog()
                 .hideGoogleOneTap()
                 .changeToGrid()
                 .waitElementToBeStable()
@@ -106,6 +110,7 @@ public class UIResponsivenessTests extends BaseTest {
         homeSteps
                 .setViewportSize(WIDTH_FOR_MOBILE, HEIGHT_FOR_MOBILE)
                 .waitForLoadState()
+                .hideDialog()
                 .hideGoogleOneTap()
                 .validateNavBarIsVisible()
                 .validateSearchBarIsVisible()
@@ -118,6 +123,7 @@ public class UIResponsivenessTests extends BaseTest {
                 .clickSearchButton();
         listingSteps
                 .waitElementToBeStable()
+                .hideDialog()
                 .hideGoogleOneTap()
                 .changeToGrid()
                 .waitElementToBeStable()

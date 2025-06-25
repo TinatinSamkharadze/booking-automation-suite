@@ -27,6 +27,7 @@ public class DataDrivenTests extends BaseTest {
     public void searchFormTest(BookingCase bookingCase) {
         homeSteps
                 .waitForLoadState()
+                .hideDialog()
                 .hideGoogleOneTap()
                 .setViewportSize(WIDTH_FOR_DESKTOP, HEIGHT_FOR_DESKTOP)
                 .validateSearchBarIsClear()
@@ -45,6 +46,7 @@ public class DataDrivenTests extends BaseTest {
                 .clickSearchButton();
         listingSteps
                 .waitElementToBeStable()
+                .hideDialog()
                 .hideGoogleOneTap()
                 .validateResultsLocationIsCorrect(bookingCase.getDestination())
                 .validateCheckIn(bookingCase.getCheckIn())

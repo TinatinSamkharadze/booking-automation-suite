@@ -313,9 +313,14 @@ public class ListingSteps {
     @Step("Hide dialog")
     public ListingSteps hideDialog()
     {
-        homePage.page.evaluate(
-                "const el = document.querySelector('.c1cb99b7ca'); if (el) el.style.display = 'none';"
-        );
+        homePage.page.evaluate("""
+    const elements = Array.from(document.querySelectorAll('*'));
+    const textElement = elements.find(el => el.textContent?.includes('Sign in or Register'));
+    if (textElement) {
+        const dialog = textElement.closest('div');
+        if (dialog) dialog.style.display = 'none';
+    }
+""");
         return this;
     }
 }
